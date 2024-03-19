@@ -5,3 +5,57 @@
     clear: both;
   }
 }
+
+// Media Query Manager
+
+/*
+  Breakpoints 
+
+  0 - 600px :         phone
+  600 - 900px:        Portrait tablets
+  900 - 1200px:       Landscape tablets
+  [1200px - 1800px]:  Width range where our regular css applies
+  1880px +  :         Large desktop
+*/
+
+/*
+  Breakpoint argument choices - 
+  - phone
+  - tab-port
+  - tab-land
+  - big-desktop 
+*/
+
+@mixin respond($breakpoint) {
+  // em and rem in media queries are not affected by the font-size defined in html tag style
+  // rem unit in media queries don't work in some browsers, therefore em units are widely used.
+
+  @if $breakpoint == phone {
+    // only screen ensures that media query only applies to screen and not for others example printing
+    @media only screen and (max-width: 37.5em) {
+      // 600px
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      // 900px
+      @content;
+    }
+  }
+
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      // 1200px
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      // 1800px
+      @content;
+    }
+  }
+}
